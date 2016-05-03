@@ -29,7 +29,17 @@ public class MainApplet extends PApplet{
 	}
 
 	public void draw() {
-
+		background(255);
+		/*
+		for(int i=0;i<characters.size();i++){
+			for(int j=0;j<characters.get(i).getTargets().size();j++){
+				line(characters.get(i).x,characters.get(i).y,characters.get(i).getTargets().get(j).x,characters.get(i).getTargets().get(j).y);
+			}
+		}
+		*/
+		for(int i=0;i<characters.size();i++){
+			characters.get(i).display();
+		}
 	}
 
 	private void loadData(){
