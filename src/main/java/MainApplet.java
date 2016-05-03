@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.ArrayList;
 
+
+import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
@@ -17,18 +19,20 @@ public class MainApplet extends PApplet{
 	JSONObject data;
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
+	private Network network = new Network(this);
 	private final static int width = 1200, height = 650;
 	
-	public void setup() {
-		
+	public void setup() 
+	{	
+		Ani.init(this);
 		characters = new ArrayList<Character>();
 		size(width, height);
 		smooth();
 		loadData();
-		
 	}
 
-	public void draw() {
+	public void draw() 
+	{
 		background(255);
 		/*
 		for(int i=0;i<characters.size();i++){
@@ -37,13 +41,32 @@ public class MainApplet extends PApplet{
 			}
 		}
 		*/
-		for(int i=0;i<characters.size();i++){
+		network.display();
+		for(int i=0;i<characters.size();i++)
+		{
 			characters.get(i).display();
 		}
 	}
 
-	private void loadData(){
-		data = loadJSONObject(this.path+this.file);
+	public void mouseDragged()
+	{
+		for(int i=0;i<characters.size();i++)
+		{
+			if(mouseX >= characters.get(i).getX()-30 && mouseX <= characters.get(i).getX()+30)
+			{
+				if(mouseY >= characters.get(i).getY()-30 && mouseY <= characters.get(i).getY()+30)
+				{
+					Ani.to(characters.get(i), (float) 0.001, "x", mouseX); 
+					Ani.to(characters.get(i), (float) 0.001, "y", mouseY);
+				}
+			}
+		}
+	}
+	
+	
+	private void loadData()
+	{
+		data = loadJSONObject(this.path + this.file);
 		nodes = data.getJSONArray("nodes");
 		
 		for (int i = 0; i < nodes.size(); i++) {
@@ -60,13 +83,10 @@ public class MainApplet extends PApplet{
 			//System.out.println(id + ", " + species + ", " + name);
 		}
 		
-		
-		
 		links = data.getJSONArray("links");
 		
-		for (int i = 0; i < links.size(); i++) {
-			
-			
+		for (int i = 0; i < links.size(); i++) 
+		{
 			JSONObject character = links.getJSONObject(i);
 			
 			int source = character.getInt("source");
@@ -77,5 +97,4 @@ public class MainApplet extends PApplet{
 			//System.out.println(id + ", " + species + ", " + name);
 		}
 	}
-
 }
