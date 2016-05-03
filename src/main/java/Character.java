@@ -13,20 +13,21 @@ public class Character
 	private String name;
 	private MainApplet parent;
 	private ArrayList<Character> targets = new ArrayList<Character>();
-
-	public Character(MainApplet parent)
+	
+	
+	public Character(MainApplet parent, String name, float x, float y, float radius)
 	{
 		this.parent = parent;
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		
+		this.radius = radius;
 	}
 
 	public void display()
 	{
 		this.parent.fill(100,100,235);
-		this.parent.rect(x, y, 80, 30);
+		this.parent.ellipse(x, y, 30, 30);
 		this.parent.fill(0);
 		this.parent.text(name, x+10, y+10);
 	}
