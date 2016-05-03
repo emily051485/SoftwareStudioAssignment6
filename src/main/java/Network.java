@@ -22,6 +22,7 @@ public class Network {
 	public Network(PApplet parent)
 	{
 		this.parent = parent;	
+		
 	}
 
 	public void display()
@@ -46,4 +47,7 @@ public class Network {
 		updatelocation();
 	}
 	
+	public void clean() {
+		characters.clear();
+	}
 }
