@@ -14,7 +14,7 @@ import processing.core.PApplet;
 public class Network {
 	
 	private PApplet parent;
-	private ArrayList<Character> characters;
+	private ArrayList<Character> characters = new ArrayList<Character>();
 	private float bigcircle_x = 700;
 	private float bigcircle_y = 300;
 	private float radius = 200;
@@ -37,12 +37,13 @@ public class Network {
 		for(int i=0;i<characters.size();i++){
 			float x = bigcircle_x + radius*(float)Math.cos(i*2*Math.PI/characters.size());
 			float y = bigcircle_y + radius*(float)Math.sin(i*2*Math.PI/characters.size());
-			setPosition(x,y);
+			characters.get(i).setPosition(x,y);
 		}
 	}
 	
 	public void addch(Character ch){
 		characters.add(ch);
+		updatelocation();
 	}
 	
 }

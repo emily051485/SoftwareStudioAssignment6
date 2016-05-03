@@ -94,7 +94,7 @@ public class MainApplet extends PApplet{
 			{
 				if(curCh.getY()-15 >= 100 && curCh.getY()+15 <= 500)
 				{
-					
+					network.addch(curCh);
 				}
 				else
 				{
