@@ -1,11 +1,8 @@
 package main.java;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import de.looksgood.ani.Ani;
-import processing.core.PApplet;
 
 /**
 * This class is used to store states of the characters in the program.

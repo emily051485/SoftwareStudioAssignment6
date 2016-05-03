@@ -73,28 +73,46 @@ public class MainApplet extends PApplet{
 	
 	public void mouseDragged()
 	{
-		Ani.to(curCh, (float) 0.001, "x", mouseX); 
-		Ani.to(curCh, (float) 0.001, "y", mouseY);
+		if(curCh != null)
+		{
+			Ani.to(curCh, (float) 0.001, "x", mouseX); 
+			Ani.to(curCh, (float) 0.001, "y", mouseY);
+		}
 	}
 	
 	public void mouseReleased()				//  700 300 400 400
 	{
-		if(curCh.getX()-15 >= 500 && curCh.getX()+15 <= 900)
-		{
-			if(curCh.getY()-15 >= 100 && curCh.getY()+15 <= 500)
+		if(curCh != null)
+		{	
+			if(curCh.getX()-15 >= 500 && curCh.getX()+15 <= 900)
 			{
-				
+				if(curCh.getY()-15 >= 100 && curCh.getY()+15 <= 500)
+				{
+					
+				}
+			}
+			else
+			{
+				curCh.initial();
+				curCh = null;
 			}
 		}
-		else
+	}
+	
+	public void mouseEntered()
+	{
+		if(mouseX >= 500 && mouseX <= 900)
 		{
-			curCh.initial();
+			if(mouseY >= 100 && mouseY <= 500)
+			{
+				System.out.println("test");
+			}
 		}
 	}
 	
 	private void loadData()
 	{
-		data = loadJSONObject(this.path + this.file);
+		data = loadJSONObject(this.path + this.file[0]);
 		nodes = data.getJSONArray("nodes");
 		
 		for (int i = 0; i < nodes.size(); i++) {
