@@ -105,13 +105,20 @@ public class MainApplet extends PApplet{
 		}
 	}
 	
-	public void keyPressed()
+	public void keyPressed(KeyEvent arg0)
 	{
-		if( KeyEvent.VK_NUMPAD1 )
-		{
-			whichfile = 0;
-		}
+		whichfile = arg0.getKeyCode()-49;
+		System.out.println(whichfile);
 		loadData();
+	}
+	
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
 	}
 	
 	public void mouseMoved()
