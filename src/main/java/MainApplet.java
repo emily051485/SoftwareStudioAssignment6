@@ -41,10 +41,10 @@ public class MainApplet extends PApplet{
 			JSONObject character = nodes.getJSONObject(i);
 			
 			String name = character.getString("name");
-			//String color = character.getString("colour");
-			//String value = character.getString("value");
-			
-			Character ch = new Character(this);
+			String color = character.getString("colour");
+			//int value = character.getInt("value");
+			//MainApplet parent, String name, float x, float y, float radius
+			Character ch = new Character(this,name,i,color);
 			characters.add(ch);
 			//System.out.println(id + ", " + species + ", " + name);
 		}
