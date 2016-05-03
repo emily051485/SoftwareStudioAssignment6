@@ -28,11 +28,11 @@ public class Character
 		this.x = 10 + (order%10)*10;
 		this.y = 10 + order*10;
 		this.radius = 10;
-
-		r = Integer.valueOf( color.substring( 0, 1 ), 16 );
-        g = Integer.valueOf( color.substring( 2, 3 ), 16 );
-        b = Integer.valueOf( color.substring( 4, 5 ), 16 );
+		r = Integer.valueOf( color.substring( 1, 3 ), 16 );
+        g = Integer.valueOf( color.substring( 3, 5 ), 16 );
+        b = Integer.valueOf( color.substring( 5, 7 ), 16 );
         System.out.println(r + " " + g + " " + b);
+	
 	}
 
 	public void display()
