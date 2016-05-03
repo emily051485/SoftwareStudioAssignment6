@@ -135,11 +135,9 @@ public class MainApplet extends PApplet{
 		data = loadJSONObject(this.path + this.file[whichfile]);
 		nodes = data.getJSONArray("nodes");
 		
-		for (int i = 0; i < nodes.size(); i++) {
-			
-			
+		for (int i = 0; i < nodes.size(); i++) 
+		{
 			JSONObject character = nodes.getJSONObject(i);
-			
 			String name = character.getString("name");
 			String color = character.getString("colour");
 			//int value = character.getInt("value");
@@ -152,11 +150,9 @@ public class MainApplet extends PApplet{
 		for (int i = 0; i < links.size(); i++) 
 		{
 			JSONObject character = links.getJSONObject(i);
-			
 			int source = character.getInt("source");
 			int target = character.getInt("target");
 			int value = character.getInt("value");
-			
 			characters.get(source).addTarget(characters.get(target),value);
 		}
 	}
