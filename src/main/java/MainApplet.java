@@ -20,6 +20,7 @@ public class MainApplet extends PApplet{
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
 	private Network network = new Network(this);
+	private Character curCh;
 	private final static int width = 1200, height = 650;
 	
 	public void setup() 
@@ -48,7 +49,7 @@ public class MainApplet extends PApplet{
 		}
 	}
 
-	public void mouseDragged()
+	public void mousePressed()
 	{
 		for(int i=0;i<characters.size();i++)
 		{
@@ -56,13 +57,32 @@ public class MainApplet extends PApplet{
 			{
 				if(mouseY >= characters.get(i).getY()-30 && mouseY <= characters.get(i).getY()+30)
 				{
-					Ani.to(characters.get(i), (float) 0.001, "x", mouseX); 
-					Ani.to(characters.get(i), (float) 0.001, "y", mouseY);
+					curCh = characters.get(i);
 				}
 			}
 		}
 	}
 	
+	public void mouseDragged()
+	{
+		Ani.to(curCh, (float) 0.001, "x", mouseX); 
+		Ani.to(curCh, (float) 0.001, "y", mouseY);
+	}
+	
+	public void mouseReleased()				//  700 300 400 400
+	{
+		if(curCh.getX()-15 >= 500 && curCh.getX()+15 <= 900)
+		{
+			if(curCh.getY()-15 >= 100 && curCh.getY()+15 <= 500)
+			{
+				
+			}
+		}
+		else
+		{
+			curCh.initial();
+		}
+	}
 	
 	private void loadData()
 	{

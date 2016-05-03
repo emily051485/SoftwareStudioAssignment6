@@ -73,4 +73,10 @@ public class Character
 	{
 		return this.y;
 	}
+	
+	public void initial()
+	{
+		Ani.to(this, (float) 0.5, "x", 30+(order/10)*50); 
+		Ani.to(this, (float) 0.5, "y", 30+(order%10)*40);
+	}
 }
