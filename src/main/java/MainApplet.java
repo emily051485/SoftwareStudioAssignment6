@@ -20,7 +20,8 @@ public class MainApplet extends PApplet{
 	private final static int width = 1200, height = 650;
 	
 	public void setup() {
-
+		
+		characters = new ArrayList<Character>();
 		size(width, height);
 		smooth();
 		loadData();
