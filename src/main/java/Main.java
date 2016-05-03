@@ -14,8 +14,8 @@ public class Main extends JFrame{
 	
 	private final static int windowWidth = 1200, windowHeight = 670;
 	
-	public static void main(String [] args){
-		
+	public static void main(String [] args)
+	{
 		MainApplet applet = new MainApplet();
 		applet.init();
 		applet.start();
