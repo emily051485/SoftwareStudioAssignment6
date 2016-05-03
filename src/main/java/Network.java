@@ -24,17 +24,16 @@ public class Network {
 		
 	}
 
-	public void display(){
+	public void display()
+	{
 		this.parent.noFill();
-		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);
-		
-		
-		
-		
+		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);	
 	}
 	
-	public void updatelocation(){
-		for(int i=0;i<characters.size();i++){
+	public void updatelocation()
+	{
+		for(int i=0;i<characters.size();i++)
+		{
 			float x = bigcircle_x + radius*(float)Math.cos(i*2*Math.PI/characters.size());
 			float y = bigcircle_y + radius*(float)Math.sin(i*2*Math.PI/characters.size());
 			characters.get(i).setPosition(x,y);

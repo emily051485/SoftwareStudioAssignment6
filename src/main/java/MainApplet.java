@@ -90,17 +90,9 @@ public class MainApplet extends PApplet{
 	{
 		if(curCh != null)
 		{	
-			if(curCh.getX()-15 >= 500 && curCh.getX()+15 <= 900)
+			if( (curCh.getX()-700)*(curCh.getX()-700)+(curCh.getY()-300)*(curCh.getY()-300) < 40000)
 			{
-				if(curCh.getY()-15 >= 100 && curCh.getY()+15 <= 500)
-				{
-					network.addch(curCh);
-				}
-				else
-				{
-					curCh.initial();
-					curCh = null;
-				}
+				network.addch(curCh);
 			}
 			else
 			{
