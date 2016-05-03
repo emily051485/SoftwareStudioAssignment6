@@ -107,11 +107,13 @@ public class MainApplet extends PApplet{
 	
 	public void keyPressed(KeyEvent arg0)
 	{
-		whichfile = arg0.getKeyCode()-49;
-		
-		characters.clear();
-		
-		loadData();
+		if(arg0.getKeyCode()>=49 && arg0.getKeyCode() < 56)
+		{
+			whichfile = arg0.getKeyCode()-49;
+			network.clean();
+			characters.clear();
+			loadData();
+		}
 	}
 
 	public void mouseMoved()
