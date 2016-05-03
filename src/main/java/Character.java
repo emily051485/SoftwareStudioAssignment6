@@ -31,13 +31,11 @@ public class Character
 		r = Integer.valueOf( color.substring( 1, 3 ), 16 );
         g = Integer.valueOf( color.substring( 3, 5 ), 16 );
         b = Integer.valueOf( color.substring( 5, 7 ), 16 );
-        System.out.println(r + " " + g + " " + b);
-	
 	}
 
 	public void display()
 	{
-		//this.parent.fill();
+		this.parent.fill(r, g, b);
 		this.parent.ellipse(x, y, radius, radius);;
 		this.parent.fill(0);
 		this.parent.text(name, x+10, y+10);
