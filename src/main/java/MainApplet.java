@@ -1,5 +1,6 @@
 package main.java;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 
@@ -58,12 +59,13 @@ public class MainApplet extends PApplet{
 		{
 			characters.get(i).display();
 		}
+		
 		if(hoveringCh != null)
 		{
 			hoveringCh.showName();
 		}
 	}
-	//mouse
+
 	public void mousePressed()
 	{
 		for(int i=0;i<characters.size();i++)
@@ -103,29 +105,29 @@ public class MainApplet extends PApplet{
 		}
 	}
 	
+	public void keyPressed()
+	{
+		if( KeyEvent.VK_NUMPAD1 )
+		{
+			whichfile = 0;
+		}
+		loadData();
+	}
+	
 	public void mouseMoved()
 	{
 		for(int i=0;i<characters.size();i++)
 		{
-			if(mouseX >= characters.get(i).getX()-15 && mouseX <= characters.get(i).getX()+15)
+			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 1600)
 			{
-				if(mouseY >= characters.get(i).getY()-15 && mouseY <= characters.get(i).getY()+15)
-				{
-					hoveringCh = characters.get(i);
-				}
+				hoveringCh = characters.get(i);
 			}
 			else
 			{
-				hoveringCh = null;
+				if(mouseX >= 250)
+					hoveringCh = null;
 			}
 		}
-	}
-	//key
-	
-	public void keyPressed()
-	{
-		int keyvalue = key-'0';
-		 whichfile = keyvalue-1;
 	}
 	
 	private void loadData()
@@ -141,10 +143,8 @@ public class MainApplet extends PApplet{
 			String name = character.getString("name");
 			String color = character.getString("colour");
 			//int value = character.getInt("value");
-			//MainApplet parent, String name, float x, float y, float radius
 			Character ch = new Character(this,name,i,color);
 			characters.add(ch);
-			//System.out.println(id + ", " + species + ", " + name);
 		}
 		
 		links = data.getJSONArray("links");
@@ -158,7 +158,6 @@ public class MainApplet extends PApplet{
 			int value = character.getInt("value");
 			
 			characters.get(source).addTarget(characters.get(target),value);
-			//System.out.println(id + ", " + species + ", " + name);
 		}
 	}
 }
