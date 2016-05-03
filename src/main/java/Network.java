@@ -19,6 +19,8 @@ public class Network {
 	}
 
 	public void display(){
+		this.parent.noFill();
+		this.parent.ellipse(700, 300, 400, 400);
 		
 	}
 	
