@@ -18,7 +18,7 @@ public class Character
 	private ArrayList<Character> targets = new ArrayList<Character>();
 	private HashMap<String, Integer> values = new HashMap<String, Integer>();
 	@SuppressWarnings("unused")
-	private int order, r, g, b;
+	private int order, a, r, g, b;
 	
 	public Character(MainApplet parent, String name, int order, String color)
 	{
@@ -28,9 +28,10 @@ public class Character
 		this.x = 30 + (order/10)*50;
 		this.y = 30 + (order%10)*40;
 		this.radius = 30;
-		r = Integer.valueOf( color.substring( 1, 3 ), 16 );
-        g = Integer.valueOf( color.substring( 3, 5 ), 16 );
-        b = Integer.valueOf( color.substring( 5, 7 ), 16 );
+		a = Integer.valueOf( color.substring( 1, 3 ), 16 );
+        r = Integer.valueOf( color.substring( 3, 5 ), 16 );
+        g = Integer.valueOf( color.substring( 5, 7 ), 16 );
+        b = Integer.valueOf( color.substring( 7, 9 ), 16 );
 	}
 
 	public void display()
