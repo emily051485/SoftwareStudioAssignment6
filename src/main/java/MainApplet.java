@@ -31,6 +31,7 @@ public class MainApplet extends PApplet{
 	private Network network = new Network(this);
 	private Character curCh;
 	private Character hoveringCh;
+	private int whichfile = 0;
 	private final static int width = 1200, height = 650;
 	
 	public void setup() 
@@ -62,7 +63,7 @@ public class MainApplet extends PApplet{
 			hoveringCh.showName();
 		}
 	}
-
+	//mouse
 	public void mousePressed()
 	{
 		for(int i=0;i<characters.size();i++)
@@ -119,10 +120,17 @@ public class MainApplet extends PApplet{
 			}
 		}
 	}
+	//key
+	
+	public void keyPressed()
+	{
+		int keyvalue = key-'0';
+		 whichfile = keyvalue-1;
+	}
 	
 	private void loadData()
 	{
-		data = loadJSONObject(this.path + this.file[0]);
+		data = loadJSONObject(this.path + this.file[whichfile]);
 		nodes = data.getJSONArray("nodes");
 		
 		for (int i = 0; i < nodes.size(); i++) {
