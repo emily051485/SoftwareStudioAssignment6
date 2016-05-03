@@ -62,7 +62,7 @@ public class MainApplet extends PApplet{
 			int target = character.getInt("target");
 			int value = character.getInt("value");
 			
-			characters.get(source).addTarget(characters.get(target));
+			characters.get(source).addTarget(characters.get(target),value);
 			//System.out.println(id + ", " + species + ", " + name);
 		}
 	}
