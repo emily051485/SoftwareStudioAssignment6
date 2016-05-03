@@ -25,9 +25,9 @@ public class Character
 		this.parent = parent;
 		this.name = name;
 		this.order = order;
-		this.x = 10 + (order%10)*10;
-		this.y = 10 + order*10;
-		this.radius = 10;
+		this.x = 30 + (order/10)*50;
+		this.y = 30 + (order%10)*40;
+		this.radius = 30;
 		r = Integer.valueOf( color.substring( 1, 3 ), 16 );
         g = Integer.valueOf( color.substring( 3, 5 ), 16 );
         b = Integer.valueOf( color.substring( 5, 7 ), 16 );
@@ -37,8 +37,8 @@ public class Character
 	{
 		this.parent.fill(r, g, b);
 		this.parent.ellipse(x, y, radius, radius);;
-		this.parent.fill(0);
-		this.parent.text(name, x+10, y+10);
+	//	this.parent.fill(0);
+	//	this.parent.text(name, x+15, y);
 	}
 	
 	public void addTarget(Character target, int value)
