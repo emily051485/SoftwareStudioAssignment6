@@ -108,19 +108,12 @@ public class MainApplet extends PApplet{
 	public void keyPressed(KeyEvent arg0)
 	{
 		whichfile = arg0.getKeyCode()-49;
-		System.out.println(whichfile);
+		
+		characters.clear();
+		
 		loadData();
 	}
-	
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-	
+
 	public void mouseMoved()
 	{
 		for(int i=0;i<characters.size();i++)

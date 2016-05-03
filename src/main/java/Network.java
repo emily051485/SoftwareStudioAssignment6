@@ -18,10 +18,10 @@ public class Network {
 	private float bigcircle_x = 700;
 	private float bigcircle_y = 300;
 	private float radius = 200;
-	public Network(PApplet parent){
-
-		this.parent = parent;
-		
+	
+	public Network(PApplet parent)
+	{
+		this.parent = parent;	
 	}
 
 	public void display()
@@ -40,7 +40,8 @@ public class Network {
 		}
 	}
 	
-	public void addch(Character ch){
+	public void addch(Character ch)
+	{
 		characters.add(ch);
 		updatelocation();
 	}
