@@ -1,6 +1,10 @@
 package main.java;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
+import processing.data.JSONArray;
+import processing.data.JSONObject;
 
 /**
 * This class is for sketching outcome using Processing
@@ -10,7 +14,9 @@ import processing.core.PApplet;
 public class MainApplet extends PApplet{
 	private String path = "main/resources/";
 	private String file = "starwars-episode-1-interactions.json";
-	
+	JSONObject data;
+	JSONArray nodes, links;
+	private ArrayList<Character> characters;
 	private final static int width = 1200, height = 650;
 	
 	public void setup() {
@@ -18,15 +24,47 @@ public class MainApplet extends PApplet{
 		size(width, height);
 		smooth();
 		loadData();
+		
 	}
 
 	public void draw() {
 
 	}
 
-	private void loadData()
-	{
-
+	private void loadData(){
+		data = loadJSONObject(this.file);
+		nodes = data.getJSONArray("nodes");
+		
+		for (int i = 0; i < nodes.size(); i++) {
+			
+			
+			JSONObject character = nodes.getJSONObject(i);
+			
+			String name = character.getString("name");
+			//String color = character.getString("colour");
+			//String value = character.getString("value");
+			
+			Character ch = new Character(this);
+			characters.add(ch);
+			//System.out.println(id + ", " + species + ", " + name);
+		}
+		
+		
+		
+		links = data.getJSONArray("links");
+		
+		for (int i = 0; i < links.size(); i++) {
+			
+			
+			JSONObject character = links.getJSONObject(i);
+			
+			int source = character.getInt("source");
+			int target = character.getInt("target");
+			int value = character.getInt("value");
+			
+			characters.get(source).addTarget(characters.get(target));
+			//System.out.println(id + ", " + species + ", " + name);
+		}
 	}
 
 }
