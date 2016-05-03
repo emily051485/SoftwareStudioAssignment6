@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 
 /**
@@ -37,7 +38,7 @@ public class Character
 	public void display()
 	{
 		this.parent.fill(r, g, b);
-		this.parent.ellipse(x, y, radius, radius);;
+		this.parent.ellipse(x, y, radius, radius);
 	//	this.parent.fill(0);
 	//	this.parent.text(name, x+15, y);
 	}
@@ -61,5 +62,15 @@ public class Character
 	public int getvalue(Character tar)
 	{
 		return values.get(tar);
+	}
+	
+	public float getX()
+	{
+		return this.x;
+	}
+	
+	public float getY()
+	{
+		return this.y;
 	}
 }
