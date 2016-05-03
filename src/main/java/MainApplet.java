@@ -15,7 +15,8 @@ import processing.data.JSONObject;
 @SuppressWarnings("serial")
 public class MainApplet extends PApplet{
 	private String path = "main/resources/";
-	private String[] file = {
+	private String[] file = 
+	{
 			"starwars-episode-1-interactions.json",
 			"starwars-episode-2-interactions.json",
 			"starwars-episode-3-interactions.json",
@@ -29,6 +30,7 @@ public class MainApplet extends PApplet{
 	private ArrayList<Character> characters;
 	private Network network = new Network(this);
 	private Character curCh;
+	private Character hoveringCh;
 	private final static int width = 1200, height = 650;
 	
 	public void setup() 
@@ -54,6 +56,10 @@ public class MainApplet extends PApplet{
 		for(int i=0;i<characters.size();i++)
 		{
 			characters.get(i).display();
+		}
+		if(hoveringCh != null)
+		{
+			hoveringCh.showName();
 		}
 	}
 
@@ -90,6 +96,11 @@ public class MainApplet extends PApplet{
 				{
 					
 				}
+				else
+				{
+					curCh.initial();
+					curCh = null;
+				}
 			}
 			else
 			{
@@ -99,13 +110,20 @@ public class MainApplet extends PApplet{
 		}
 	}
 	
-	public void mouseEntered()
+	public void mouseMoved()
 	{
-		if(mouseX >= 500 && mouseX <= 900)
+		for(int i=0;i<characters.size();i++)
 		{
-			if(mouseY >= 100 && mouseY <= 500)
+			if(mouseX >= characters.get(i).getX()-15 && mouseX <= characters.get(i).getX()+15)
 			{
-				System.out.println("test");
+				if(mouseY >= characters.get(i).getY()-15 && mouseY <= characters.get(i).getY()+15)
+				{
+					hoveringCh = characters.get(i);
+				}
+			}
+			else
+			{
+				hoveringCh = null;
 			}
 		}
 	}
