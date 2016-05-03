@@ -32,7 +32,7 @@ public class MainApplet extends PApplet{
 	}
 
 	private void loadData(){
-		data = loadJSONObject(this.file);
+		data = loadJSONObject(this.path+this.file);
 		nodes = data.getJSONArray("nodes");
 		
 		for (int i = 0; i < nodes.size(); i++) {
