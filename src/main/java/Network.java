@@ -1,7 +1,11 @@
 package main.java;
 
+import java.awt.font.OpenType;
 import java.time.Year;
 import java.util.ArrayList;
+
+import javax.management.openmbean.OpenDataException;
+
 import processing.core.PApplet;
 
 /**
@@ -49,6 +53,7 @@ public class Network {
 	{
 		characters.remove(ch);
 		updatelocation();
+		drawline();
 	}
 	
 	public int checkMember(Character ch)
@@ -66,5 +71,12 @@ public class Network {
 	public void clean() 
 	{
 		characters.clear();
+	}
+	
+	public void drawline()
+	{
+		this.parent.noFill();
+		this.parent.arc(50.f, 50.f, 50.f, 50.f, 0.f, (float)(0.5*Math.PI));
+		
 	}
 }
