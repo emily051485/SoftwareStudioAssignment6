@@ -84,8 +84,7 @@ public class MainApplet extends PApplet{
 	{
 		if(curCh != null)
 		{
-			Ani.to(curCh, (float) 0.001, "x", mouseX); 
-			Ani.to(curCh, (float) 0.001, "y", mouseY);
+			curCh.setPosition(mouseX,  mouseY);
 		}
 	}
 	
