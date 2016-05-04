@@ -50,7 +50,6 @@ public class Network {
 	{
 		characters.remove(ch);
 		updatelocation();
-		//drawline();
 	}
 	
 	public int checkMember(Character ch)

@@ -56,15 +56,16 @@ public class MainApplet extends PApplet{
 		addall.setBackground(Color.green);
 		addall.setBounds(1000, 100, 100, 50);
 		addall.setFont(new Font("Consolas", Font.BOLD, 25));
-		addall.addActionListener(new ActionListener() {
-		
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				for(int i=0;i<characters.size();i++){
+		addall.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				for(int i=0;i<characters.size();i++)
+				{
 					if(network.checkMember(characters.get(i)) == 0)
 					{
 						network.addch(characters.get(i));
+						isClear = 0;
 					}
 					else
 					{
@@ -78,19 +79,19 @@ public class MainApplet extends PApplet{
 		clear.setBackground(Color.green);
 		clear.setBounds(1000, 200, 100, 50);
 		clear.setFont(new Font("Consolas", Font.BOLD, 25));
-		clear.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				for(int i=0;i<characters.size();i++){
-					if(network.checkMember(characters.get(i))==1){
-						isClear = 1;
-						network.removech(characters.get(i));
+		clear.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				isClear = 1;
+				for(int i=0;i<characters.size();i++)
+				{
+					if(network.checkMember(characters.get(i)) == 1)
+					{
 						characters.get(i).initial();
+						network.removech(characters.get(i));
 					}
 				}
-				isClear = 0;
 			}
 		});
 		add(clear);
@@ -107,7 +108,7 @@ public class MainApplet extends PApplet{
 		}
 		*/
 		network.display();
-		if(isClear  == 0)
+		if(isClear == 0)
 		{
 			network.drawline();
 		}
@@ -154,6 +155,7 @@ public class MainApplet extends PApplet{
 				if(network.checkMember(curCh) == 0)
 				{
 					network.addch(curCh);
+					isClear = 0;
 				}
 				else
 				{
