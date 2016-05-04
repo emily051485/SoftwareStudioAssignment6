@@ -56,7 +56,7 @@ public class Character
 	
 	public int getvalue(Character tar)
 	{
-		return values.get(tar);
+		return values.get(tar.getName());
 	}
 	
 	public float getX()

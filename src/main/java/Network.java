@@ -81,7 +81,9 @@ public class Network {
 				{
 					if(characters.get(i).getTargets().get(j).getName().equals(characters.get(k).getName()))
 					{
+						this.parent.strokeWeight(characters.get(i).getvalue(characters.get(i).getTargets().get(j))/5+1);
 						this.parent.bezier(characters.get(i).getX(), characters.get(i).getY(), 700, 300, 700, 300, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
+						this.parent.strokeWeight(1);
 					}	
 				}
 			}
