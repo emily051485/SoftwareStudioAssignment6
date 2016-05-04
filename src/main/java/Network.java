@@ -26,6 +26,8 @@ public class Network {
 	{
 		this.parent.noFill();
 		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);
+	
+		
 	}
 	
 	public void updatelocation()
@@ -48,7 +50,6 @@ public class Network {
 	{
 		characters.remove(ch);
 		updatelocation();
-		drawline();
 	}
 	
 	public int checkMember(Character ch)
@@ -71,7 +72,19 @@ public class Network {
 	public void drawline()
 	{
 		this.parent.noFill();
-		this.parent.arc(50.f, 50.f, 50.f, 50.f, 0.f, (float)(0.5*Math.PI));
 		
+		for(int i=0;i<characters.size();i++)
+		{
+			for(int j=0;j<characters.get(i).getTargets().size();j++)
+			{
+				for(int k=0;k<characters.size();k++)
+				{
+					if(characters.get(i).getTargets().get(j).getName().equals(characters.get(k).getName()))
+					{
+						this.parent.bezier(characters.get(i).getX(), characters.get(i).getY(), 700, 300, 700, 300, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
+					}	
+				}
+			}
+		}
 	}
 }

@@ -55,6 +55,7 @@ public class MainApplet extends PApplet{
 		}
 		*/
 		network.display();
+		network.drawline();
 		for(int i=0;i<characters.size();i++)
 		{
 			characters.get(i).display();
