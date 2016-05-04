@@ -18,13 +18,13 @@ public class MainApplet extends PApplet{
 	private String path = "main/resources/";
 	private String[] file = 
 	{
-			"starwars-episode-1-interactions.json",
-			"starwars-episode-2-interactions.json",
-			"starwars-episode-3-interactions.json",
-			"starwars-episode-4-interactions.json",
-			"starwars-episode-5-interactions.json",
-			"starwars-episode-6-interactions.json",
-			"starwars-episode-7-interactions.json"
+		"starwars-episode-1-interactions.json",
+		"starwars-episode-2-interactions.json",
+		"starwars-episode-3-interactions.json",
+		"starwars-episode-4-interactions.json",
+		"starwars-episode-5-interactions.json",
+		"starwars-episode-6-interactions.json",
+		"starwars-episode-7-interactions.json"
 	};
 	JSONObject data;
 	JSONArray nodes, links;
@@ -60,6 +60,7 @@ public class MainApplet extends PApplet{
 			characters.get(i).display();
 		}
 		
+		//System.out.println(hoveringCh.getName());
 		if(hoveringCh != null)
 		{
 			hoveringCh.showName();
@@ -127,14 +128,13 @@ public class MainApplet extends PApplet{
 	{
 		for(int i=0;i<characters.size();i++)
 		{
-			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 1600)
+			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 400)
 			{
 				hoveringCh = characters.get(i);
 			}
 			else
 			{
-				if(mouseX >= 250)
-					hoveringCh = null;
+				hoveringCh = null;
 			}
 		}
 	}

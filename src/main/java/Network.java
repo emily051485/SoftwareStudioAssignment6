@@ -1,11 +1,6 @@
 package main.java;
 
-import java.awt.font.OpenType;
-import java.time.Year;
 import java.util.ArrayList;
-
-import javax.management.openmbean.OpenDataException;
-
 import processing.core.PApplet;
 
 /**
