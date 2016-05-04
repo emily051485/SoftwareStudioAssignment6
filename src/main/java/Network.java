@@ -21,13 +21,12 @@ public class Network {
 	public Network(PApplet parent)
 	{
 		this.parent = parent;	
-		
 	}
 
 	public void display()
 	{
 		this.parent.noFill();
-		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);	
+		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);
 	}
 	
 	public void updatelocation()
@@ -50,6 +49,18 @@ public class Network {
 	{
 		characters.remove(ch);
 		updatelocation();
+	}
+	
+	public int checkMember(Character ch)
+	{
+		for(int i=0;i<characters.size();i++)
+		{
+			if(ch.getName().equals(characters.get(i).getName()))
+			{
+				return 1;
+			}
+		}
+		return 0;
 	}
 	
 	public void clean() 

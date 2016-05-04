@@ -94,7 +94,14 @@ public class MainApplet extends PApplet{
 		{	
 			if( (curCh.getX()-700)*(curCh.getX()-700)+(curCh.getY()-300)*(curCh.getY()-300) < 40000)
 			{
-				network.addch(curCh);
+				if(network.checkMember(curCh) == 0)
+				{
+					network.addch(curCh);
+				}
+				else
+				{
+					network.updatelocation();
+				}
 			}
 			else
 			{
@@ -107,7 +114,7 @@ public class MainApplet extends PApplet{
 	
 	public void keyPressed(KeyEvent arg0)
 	{
-		if(arg0.getKeyCode()>=49 && arg0.getKeyCode() < 56)
+		if(arg0.getKeyCode() >= 49 && arg0.getKeyCode() < 56)
 		{
 			whichfile = arg0.getKeyCode()-49;
 			network.clean();
