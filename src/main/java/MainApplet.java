@@ -1,5 +1,7 @@
 package main.java;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -38,6 +40,7 @@ public class MainApplet extends PApplet{
 	private int whichfile = 0;
 	private final static int width = 1200, height = 650;
 	private Button addall, clear;
+	private int isClear = 0;
 	
 	public void setup() 
 	{	
@@ -53,11 +56,43 @@ public class MainApplet extends PApplet{
 		addall.setBackground(Color.green);
 		addall.setBounds(1000, 100, 100, 50);
 		addall.setFont(new Font("Consolas", Font.BOLD, 25));
+		addall.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				for(int i=0;i<characters.size();i++){
+					if(network.checkMember(characters.get(i)) == 0)
+					{
+						network.addch(characters.get(i));
+					}
+					else
+					{
+						network.updatelocation();
+					}
+				}
+			}
+		});
 		add(addall);
 		clear.setForeground(Color.WHITE);
 		clear.setBackground(Color.green);
 		clear.setBounds(1000, 200, 100, 50);
 		clear.setFont(new Font("Consolas", Font.BOLD, 25));
+		clear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				for(int i=0;i<characters.size();i++){
+					if(network.checkMember(characters.get(i))==1){
+						isClear = 1;
+						network.removech(characters.get(i));
+						characters.get(i).initial();
+					}
+				}
+				isClear = 0;
+			}
+		});
 		add(clear);
 	}
 
@@ -72,7 +107,10 @@ public class MainApplet extends PApplet{
 		}
 		*/
 		network.display();
-		network.drawline();
+		if(isClear  == 0)
+		{
+			network.drawline();
+		}
 		for(int i=0;i<characters.size();i++)
 		{
 			characters.get(i).display();
