@@ -3,6 +3,9 @@ package main.java;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
 
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
@@ -34,14 +37,28 @@ public class MainApplet extends PApplet{
 	private Character hoveringCh;
 	private int whichfile = 0;
 	private final static int width = 1200, height = 650;
+	private Button addall, clear;
 	
 	public void setup() 
 	{	
 		Ani.init(this);
+		this.setLayout(null);
 		characters = new ArrayList<Character>();
 		size(width, height);
 		smooth();
 		loadData();
+		addall = new Button("Add All");
+		clear = new Button("Clear");
+		addall.setForeground(Color.WHITE);
+		addall.setBackground(Color.green);
+		addall.setBounds(1000, 100, 100, 50);
+		addall.setFont(new Font("Consolas", Font.BOLD, 25));
+		add(addall);
+		clear.setForeground(Color.WHITE);
+		clear.setBackground(Color.green);
+		clear.setBounds(1000, 200, 100, 50);
+		clear.setFont(new Font("Consolas", Font.BOLD, 25));
+		add(clear);
 	}
 
 	public void draw() 
