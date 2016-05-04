@@ -77,6 +77,8 @@ public class Character
 	
 	public void showName()
 	{
+		this.parent.fill(0, 200, 0);
+		this.parent.rect(x+20, y-15, name.length()*10, 25);
 		this.parent.fill(0);
 		this.parent.text(name, x+25, y);
 	}
