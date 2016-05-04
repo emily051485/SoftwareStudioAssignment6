@@ -2,7 +2,6 @@ package main.java;
 
 import java.time.Year;
 import java.util.ArrayList;
-
 import processing.core.PApplet;
 
 /**
@@ -47,7 +46,14 @@ public class Network {
 		updatelocation();
 	}
 	
-	public void clean() {
+	public void removech(Character ch)
+	{
+		characters.remove(ch);
+		updatelocation();
+	}
+	
+	public void clean() 
+	{
 		characters.clear();
 	}
 }

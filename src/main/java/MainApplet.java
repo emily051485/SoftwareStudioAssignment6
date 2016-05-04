@@ -98,6 +98,7 @@ public class MainApplet extends PApplet{
 			}
 			else
 			{
+				network.removech(curCh);
 				curCh.initial();
 				curCh = null;
 			}
