@@ -193,17 +193,20 @@ public class MainApplet extends PApplet{
 					curCh.setIncircle();
 					updatelocation();
 					this.setThick = 0;
+					curCh = null;
 				}
 				else
 				{
 					updatelocation();
 					this.setThick = 0;
+					curCh = null;
 				}
 			}
 			else
 			{
 				curCh.setNotCircle();
 				curCh.initial();
+				updatelocation();
 				curCh = null;
 			}
 		}
