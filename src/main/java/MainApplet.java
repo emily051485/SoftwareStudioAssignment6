@@ -40,6 +40,7 @@ public class MainApplet extends PApplet{
 	private float bigcircle_x = 700;
 	private float bigcircle_y = 300;
 	private float radius = 200;
+	private int setThick = 0;
 	
 	public void setup() 
 	{	
@@ -107,9 +108,12 @@ public class MainApplet extends PApplet{
 			characters.get(i).display();
 		}
 		
-		if(hoveringCh != null)
+		for(int i=0;i<characters.size();i++)
 		{
-			hoveringCh.showName();
+			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 400)
+			{
+				characters.get(i).showName();
+			}
 		}
 	}
 	
@@ -135,7 +139,14 @@ public class MainApplet extends PApplet{
 	public void display()
 	{
 		noFill();
-		ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);	
+		stroke(100, 100, 255);
+		if(setThick == 1)
+		{
+			strokeWeight(8);
+		}
+		ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);
+		stroke(0, 0, 0);
+		strokeWeight(3);
 	}
 	
 	public void updatelocation()
@@ -172,6 +183,14 @@ public class MainApplet extends PApplet{
 		if(curCh != null)
 		{
 			curCh.setPosition(mouseX,  mouseY);
+			if((curCh.getX()-700)*(curCh.getX()-700)+(curCh.getY()-300)*(curCh.getY()-300) < 40000)
+			{
+				this.setThick = 1;
+			}
+			else
+			{
+				this.setThick = 0;
+			}
 		}
 	}
 	
@@ -185,6 +204,12 @@ public class MainApplet extends PApplet{
 				{
 					curCh.setIncircle();
 					updatelocation();
+					this.setThick = 0;
+				}
+				else
+				{
+					updatelocation();
+					this.setThick = 0;
 				}
 			}
 			else
@@ -203,21 +228,6 @@ public class MainApplet extends PApplet{
 			whichfile = arg0.getKeyCode()-49;
 			characters.clear();
 			loadData();
-		}
-	}
-
-	public void mouseMoved()
-	{
-		for(int i=0;i<characters.size();i++)
-		{
-			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 400)
-			{
-				hoveringCh = characters.get(i);
-			}
-			else
-			{
-				hoveringCh = null;
-			}
 		}
 	}
 	
