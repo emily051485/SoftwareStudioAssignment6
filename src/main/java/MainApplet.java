@@ -88,10 +88,8 @@ public class MainApplet extends PApplet{
 					{
 						characters.get(i).initial();
 						characters.get(i).setNotCircle();
-						//network.removech(characters.get(i));
 					}
 				}
-				//updatelocation();
 			}
 		});
 		add(clear);
@@ -109,7 +107,6 @@ public class MainApplet extends PApplet{
 			characters.get(i).display();
 		}
 		
-		//System.out.println(hoveringCh.getName());
 		if(hoveringCh != null)
 		{
 			hoveringCh.showName();
@@ -144,7 +141,6 @@ public class MainApplet extends PApplet{
 	public void updatelocation()
 	{
 		int j = 0;
-		System.out.println(numberInCircle());
 		for(int i=0;i<characters.size();i++)
 		{
 			if(characters.get(i).isInCircle() == 1)
@@ -190,10 +186,6 @@ public class MainApplet extends PApplet{
 					curCh.setIncircle();
 					updatelocation();
 				}
-				else
-				{
-					//updatelocation();
-				}
 			}
 			else
 			{
@@ -206,7 +198,6 @@ public class MainApplet extends PApplet{
 	
 	public void keyPressed(KeyEvent arg0)
 	{
-		//System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() >= 49 && arg0.getKeyCode() < 56)
 		{
 			whichfile = arg0.getKeyCode()-49;
@@ -253,7 +244,6 @@ public class MainApplet extends PApplet{
 			JSONObject character = nodes.getJSONObject(i);
 			String name = character.getString("name");
 			String color = character.getString("colour");
-			//int value = character.getInt("value");
 			Character ch = new Character(this,name,i,color);
 			characters.add(ch);
 		}
