@@ -4,11 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
-
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.data.JSONArray;
@@ -34,13 +32,14 @@ public class MainApplet extends PApplet{
 	JSONObject data;
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
-	private Network network = new Network(this, this);
 	private Character curCh;
 	private Character hoveringCh;
 	private int whichfile = 0;
 	private final static int width = 1200, height = 650;
 	private Button addall, clear;
-	private int isClear = 0;
+	private float bigcircle_x = 700;
+	private float bigcircle_y = 300;
+	private float radius = 200;
 	
 	public void setup() 
 	{	
@@ -62,16 +61,16 @@ public class MainApplet extends PApplet{
 			{
 				for(int i=0;i<characters.size();i++)
 				{
-					if(network.checkMember(characters.get(i)) == 0)
+					if(characters.get(i).isInCircle() == 0)
 					{
-						network.addch(characters.get(i));
-						isClear = 0;
+						characters.get(i).setIncircle();
 					}
 					else
 					{
-						network.updatelocation();
+						//updatelocation();
 					}
 				}
+				updatelocation();
 			}
 		});
 		add(addall);
@@ -83,17 +82,16 @@ public class MainApplet extends PApplet{
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				isClear = 1;
 				for(int i=0;i<characters.size();i++)
 				{
-					if(network.checkMember(characters.get(i)) == 1)
+					if(characters.get(i).isInCircle() == 1)
 					{
 						characters.get(i).initial();
+						characters.get(i).setNotCircle();
 						//network.removech(characters.get(i));
 					}
 				}
-				isClear = 0;
-				network.clean();
+				//updatelocation();
 			}
 		});
 		add(clear);
@@ -102,18 +100,10 @@ public class MainApplet extends PApplet{
 	public void draw() 
 	{
 		background(255);
-		/*
-		for(int i=0;i<characters.size();i++){
-			for(int j=0;j<characters.get(i).getTargets().size();j++){
-				line(characters.get(i).x,characters.get(i).y,characters.get(i).getTargets().get(j).x,characters.get(i).getTargets().get(j).y);
-			}
-		}
-		*/
-		network.display();
-		if(isClear == 0)
-		{
-			network.drawline();
-		}
+		
+		display();
+		drawline();
+		
 		for(int i=0;i<characters.size();i++)
 		{
 			characters.get(i).display();
@@ -123,6 +113,47 @@ public class MainApplet extends PApplet{
 		if(hoveringCh != null)
 		{
 			hoveringCh.showName();
+		}
+	}
+	
+	public void drawline()
+	{
+		for(int i=0;i<characters.size();i++)
+		{
+			if(characters.get(i).isInCircle() == 1)
+			{
+				for(int j=0;j<characters.get(i).getTargets().size();j++)
+				{
+					if(characters.get(i).getTargets().get(j).isInCircle() == 1)
+					{
+						strokeWeight(characters.get(i).getvalue(characters.get(i).getTargets().get(j))/5+1);
+						bezier(characters.get(i).getX(), characters.get(i).getY(), 700, 300, 700, 300, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
+						strokeWeight(1);
+					}
+				}
+			}
+		}
+	}
+	
+	public void display()
+	{
+		noFill();
+		ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);	
+	}
+	
+	public void updatelocation()
+	{
+		int j = 0;
+		System.out.println(numberInCircle());
+		for(int i=0;i<characters.size();i++)
+		{
+			if(characters.get(i).isInCircle() == 1)
+			{
+				float x = bigcircle_x + radius*(float)Math.cos(j*2*Math.PI/numberInCircle());
+				float y = bigcircle_y + radius*(float)Math.sin(j*2*Math.PI/numberInCircle());
+				characters.get(i).setPosition(x,y);
+				j++;
+			}
 		}
 	}
 
@@ -154,19 +185,19 @@ public class MainApplet extends PApplet{
 		{	
 			if( (curCh.getX()-700)*(curCh.getX()-700)+(curCh.getY()-300)*(curCh.getY()-300) < 40000)
 			{
-				if(network.checkMember(curCh) == 0)
+				if(curCh.isInCircle() == 0)
 				{
-					network.addch(curCh);
-					isClear = 0;
+					curCh.setIncircle();
+					updatelocation();
 				}
 				else
 				{
-					network.updatelocation();
+					//updatelocation();
 				}
 			}
 			else
 			{
-				network.removech(curCh);
+				curCh.setNotCircle();
 				curCh.initial();
 				curCh = null;
 			}
@@ -175,10 +206,10 @@ public class MainApplet extends PApplet{
 	
 	public void keyPressed(KeyEvent arg0)
 	{
+		//System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() >= 49 && arg0.getKeyCode() < 56)
 		{
 			whichfile = arg0.getKeyCode()-49;
-			network.clean();
 			characters.clear();
 			loadData();
 		}
@@ -197,6 +228,19 @@ public class MainApplet extends PApplet{
 				hoveringCh = null;
 			}
 		}
+	}
+	
+	public int numberInCircle()
+	{
+		int numbersInCircle = 0;
+		for(int i=0;i<characters.size();i++)
+		{
+			if(characters.get(i).isInCircle() == 1)
+			{
+				numbersInCircle += 1;
+			}
+		}
+		return numbersInCircle;
 	}
 	
 	private void loadData()
@@ -224,10 +268,5 @@ public class MainApplet extends PApplet{
 			int value = character.getInt("value");
 			characters.get(source).addTarget(characters.get(target),value);
 		}
-	}
-	
-	public int getIsClear()
-	{
-		return this.isClear;
 	}
 }
