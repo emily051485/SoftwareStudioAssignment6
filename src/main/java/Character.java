@@ -78,17 +78,6 @@ public class Character
 		Ani.to(this, (float) 0.5, "y", 30+(order%10)*60);
 	}
 	
-	public void showName()
-	{
-		this.parent.fill(0, 200, 0);
-		this.parent.strokeWeight(1);
-		this.parent.rect(x+20, y-25, name.length()*16, 35);
-		this.parent.fill(255);
-		this.parent.text(name, x+25, y);
-		this.parent.strokeWeight(3);
-		
-	}
-	
 	public void setPosition(float x, float y)
 	{
 		this.x = x;
@@ -108,5 +97,10 @@ public class Character
 	public int isInCircle()
 	{
 		return this.inCircle;
+	}
+	
+	public void setRadius(int r)
+	{
+		this.radius = r;
 	}
 }

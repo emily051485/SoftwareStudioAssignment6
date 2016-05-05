@@ -34,11 +34,12 @@ public class MainApplet extends PApplet{
 	private Character curCh;
 	private int whichfile = 0;
 	private final static int width = 1200, height = 650;
-	private float bigcircle_x = 700;
-	private float bigcircle_y = 300;
+	private float bigcircle_x = 600;
+	private float bigcircle_y = 400;
 	private float radius = 200;
 	private int setThick = 0;
 	private ControlP5 cp5;
+	private String title = "Star Wars " + (whichfile+1);
 	Minim minim; 
 	AudioPlayer song; 
 	
@@ -58,6 +59,7 @@ public class MainApplet extends PApplet{
 		minim = new Minim(this);
 		song = minim.loadFile("song.mp3"); 
 		song.play();
+		
 	}
 	
 	public void buttonA()
@@ -90,19 +92,41 @@ public class MainApplet extends PApplet{
 		
 		display();
 		drawline();
-		
 		for(int i=0;i<characters.size();i++)
 		{
 			characters.get(i).display();
+		}
+		
+		textSize(30);
+		text(title, 515, 80);
+		textSize(20);
+		
+		for(int i=0;i<characters.size();i++)
+		{
+			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 400)
+			{
+				fill(0, 200, 0);
+				strokeWeight(1);
+				rect(characters.get(i).getX()+30, characters.get(i).getY()-25, characters.get(i).getName().length()*16, 35);
+				fill(255);
+				text(characters.get(i).getName(), characters.get(i).getX()+35, characters.get(i).getY());
+				strokeWeight(3);
+			}
 		}
 		
 		for(int i=0;i<characters.size();i++)
 		{
 			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 400)
 			{
-				characters.get(i).showName();
+				characters.get(i).setRadius(50);
+			}
+			else
+			{
+				characters.get(i).setRadius(40);
 			}
 		}
+		
+		
 	}
 	
 	public void drawline()
@@ -214,12 +238,15 @@ public class MainApplet extends PApplet{
 	
 	public void keyPressed(KeyEvent arg0)
 	{
-		System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() >= 49 && arg0.getKeyCode() < 56)
 		{
 			whichfile = arg0.getKeyCode()-49;
-			characters.clear();
+			for(int i=0;i<characters.size();i++)
+			{
+				characters.get(i).setNotCircle();
+			}
 			loadData();
+			title = "Star Wars " + (whichfile+1);
 		}
 	}
 	
@@ -238,6 +265,7 @@ public class MainApplet extends PApplet{
 	
 	private void loadData()
 	{
+		characters.clear();
 		data = loadJSONObject(this.path + this.file[whichfile]);
 		nodes = data.getJSONArray("nodes");
 		
@@ -261,4 +289,5 @@ public class MainApplet extends PApplet{
 			characters.get(source).addTarget(characters.get(target),value);
 		}
 	}
+	
 }
