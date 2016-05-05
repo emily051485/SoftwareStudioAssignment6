@@ -1,14 +1,13 @@
 package main.java;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Font;
+import controlP5.ControlP5;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
@@ -33,14 +32,15 @@ public class MainApplet extends PApplet{
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
 	private Character curCh;
-	private Character hoveringCh;
 	private int whichfile = 0;
 	private final static int width = 1200, height = 650;
-	private Button addall, clear;
 	private float bigcircle_x = 700;
 	private float bigcircle_y = 300;
 	private float radius = 200;
 	private int setThick = 0;
+	private ControlP5 cp5;
+	Minim minim; 
+	AudioPlayer song; 
 	
 	public void setup() 
 	{	
@@ -50,53 +50,41 @@ public class MainApplet extends PApplet{
 		size(width, height);
 		smooth();
 		loadData();
-		addall = new Button("Add All");
-		clear = new Button("Clear");
-		addall.setForeground(Color.WHITE);
-		addall.setBackground(Color.green);
-		addall.setBounds(1000, 100, 100, 50);
-		addall.setFont(new Font("Consolas", Font.BOLD, 25));
-		addall.addActionListener(new ActionListener()
+		cp5 = new ControlP5(this);
+		PFont p = createFont("Consolas", 25);
+		cp5.setFont(p);
+		cp5.addButton("buttonA").setLabel("Add All").setPosition(width-240, 100).setSize(200, 50); 
+		cp5.addButton("buttonB").setLabel("Clear").setPosition(width-240, 180).setSize(200, 50);
+		minim = new Minim(this);
+		song = minim.loadFile("song.mp3"); 
+		song.play();
+	}
+	
+	public void buttonA()
+	{
+		for(int i=0;i<characters.size();i++)
 		{
-			public void actionPerformed(ActionEvent e) 
+			if(characters.get(i).isInCircle() == 0)
 			{
-				for(int i=0;i<characters.size();i++)
-				{
-					if(characters.get(i).isInCircle() == 0)
-					{
-						characters.get(i).setIncircle();
-					}
-					else
-					{
-						//updatelocation();
-					}
-				}
-				updatelocation();
+				characters.get(i).setIncircle();
 			}
-		});
-		add(addall);
-		clear.setForeground(Color.WHITE);
-		clear.setBackground(Color.green);
-		clear.setBounds(1000, 200, 100, 50);
-		clear.setFont(new Font("Consolas", Font.BOLD, 25));
-		clear.addActionListener(new ActionListener() 
+		}
+		updatelocation();
+	}
+	
+	public void buttonB()
+	{
+		for(int i=0;i<characters.size();i++)
 		{
-			public void actionPerformed(ActionEvent e)
+			if(characters.get(i).isInCircle() == 1)
 			{
-				for(int i=0;i<characters.size();i++)
-				{
-					if(characters.get(i).isInCircle() == 1)
-					{
-						characters.get(i).initial();
-						characters.get(i).setNotCircle();
-					}
-				}
+				characters.get(i).initial();
+				characters.get(i).setNotCircle();
 			}
-		});
-		add(clear);
+		}
 	}
 
-	public void draw() 
+	public void draw()
 	{
 		background(255);
 		
@@ -223,6 +211,7 @@ public class MainApplet extends PApplet{
 	
 	public void keyPressed(KeyEvent arg0)
 	{
+		System.out.println(arg0.getKeyCode());
 		if(arg0.getKeyCode() >= 49 && arg0.getKeyCode() < 56)
 		{
 			whichfile = arg0.getKeyCode()-49;

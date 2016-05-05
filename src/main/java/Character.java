@@ -82,7 +82,7 @@ public class Character
 	{
 		this.parent.fill(0, 200, 0);
 		this.parent.strokeWeight(1);
-		this.parent.rect(x+20, y-15, name.length()*10, 25);
+		this.parent.rect(x+20, y-25, name.length()*16, 35);
 		this.parent.fill(255);
 		this.parent.text(name, x+25, y);
 		this.parent.strokeWeight(3);
