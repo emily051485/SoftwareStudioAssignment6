@@ -12,22 +12,22 @@ import processing.core.PApplet;
 public class Network {
 	
 	private PApplet parent;
+	private MainApplet main;
 	private ArrayList<Character> characters = new ArrayList<Character>();
 	private float bigcircle_x = 700;
 	private float bigcircle_y = 300;
 	private float radius = 200;
 	
-	public Network(PApplet parent)
+	public Network(PApplet parent, MainApplet main)
 	{
 		this.parent = parent;	
+		this.main = main;
 	}
 
 	public void display()
 	{
 		this.parent.noFill();
-		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);
-	
-		
+		this.parent.ellipse(bigcircle_x, bigcircle_y, 2*radius, 2*radius);	
 	}
 	
 	public void updatelocation()
@@ -73,18 +73,21 @@ public class Network {
 	{
 		this.parent.noFill();
 		
-		for(int i=0;i<characters.size();i++)
+		if(main.getIsClear() == 0)
 		{
-			for(int j=0;j<characters.get(i).getTargets().size();j++)
+			for(int i=0;i<characters.size();i++)
 			{
-				for(int k=0;k<characters.size();k++)
+				for(int j=0;j<characters.get(i).getTargets().size();j++)
 				{
-					if(characters.get(i).getTargets().get(j).getName().equals(characters.get(k).getName()))
+					for(int k=0;k<characters.size();k++)
 					{
-						this.parent.strokeWeight(characters.get(i).getvalue(characters.get(i).getTargets().get(j))/5+1);
-						this.parent.bezier(characters.get(i).getX(), characters.get(i).getY(), 700, 300, 700, 300, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
-						this.parent.strokeWeight(1);
-					}	
+						if(characters.get(i).getTargets().get(j).getName().equals(characters.get(k).getName()))
+						{
+							this.parent.strokeWeight(characters.get(i).getvalue(characters.get(i).getTargets().get(j))/5+1);
+							this.parent.bezier(characters.get(i).getX(), characters.get(i).getY(), 700, 300, 700, 300, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
+							this.parent.strokeWeight(1);
+						}
+					}
 				}
 			}
 		}

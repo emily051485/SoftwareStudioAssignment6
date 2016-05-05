@@ -34,7 +34,7 @@ public class MainApplet extends PApplet{
 	JSONObject data;
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
-	private Network network = new Network(this);
+	private Network network = new Network(this, this);
 	private Character curCh;
 	private Character hoveringCh;
 	private int whichfile = 0;
@@ -89,9 +89,11 @@ public class MainApplet extends PApplet{
 					if(network.checkMember(characters.get(i)) == 1)
 					{
 						characters.get(i).initial();
-						network.removech(characters.get(i));
+						//network.removech(characters.get(i));
 					}
 				}
+				isClear = 0;
+				network.clean();
 			}
 		});
 		add(clear);
@@ -222,5 +224,10 @@ public class MainApplet extends PApplet{
 			int value = character.getInt("value");
 			characters.get(source).addTarget(characters.get(target),value);
 		}
+	}
+	
+	public int getIsClear()
+	{
+		return this.isClear;
 	}
 }

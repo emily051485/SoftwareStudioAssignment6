@@ -17,6 +17,7 @@ public class Character
 	private HashMap<String, Integer> values = new HashMap<String, Integer>();
 	@SuppressWarnings("unused")
 	private int order, a, r, g, b;
+	private int inCircle = 0;
 	
 	public Character(MainApplet parent, String name, int order, String color)
 	{
@@ -87,5 +88,20 @@ public class Character
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void setIncircle()
+	{
+		this.inCircle = 1;
+	}
+	
+	public void setNotCircle()
+	{
+		this.inCircle = 0;
+	}
+	
+	public int isInCircle()
+	{
+		return this.inCircle;
 	}
 }
