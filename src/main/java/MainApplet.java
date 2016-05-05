@@ -140,7 +140,7 @@ public class MainApplet extends PApplet{
 					if(characters.get(i).getTargets().get(j).isInCircle() == 1)
 					{
 						strokeWeight(characters.get(i).getvalue(characters.get(i).getTargets().get(j))/5+1);
-						bezier(characters.get(i).getX(), characters.get(i).getY(), 700, 300, 700, 300, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
+						bezier(characters.get(i).getX(), characters.get(i).getY(), 600, 400, 600, 400, characters.get(i).getTargets().get(j).getX(), characters.get(i).getTargets().get(j).getY());
 						strokeWeight(1);
 					}
 				}
