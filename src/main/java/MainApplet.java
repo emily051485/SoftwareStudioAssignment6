@@ -114,7 +114,7 @@ public class MainApplet extends PApplet{
 			}
 		}
 		
-		for(int i=0;i<characters.size();i++)  // set the big circle more thick when dragging a node on it
+		for(int i=0;i<characters.size();i++)  // set the the nodes bigger when the mouse is hovering on it
 		{
 			if( (characters.get(i).getX()-mouseX)*(characters.get(i).getX()-mouseX)+(characters.get(i).getY()-mouseY)*(characters.get(i).getY()-mouseY) < 400)
 			{
@@ -195,7 +195,7 @@ public class MainApplet extends PApplet{
 		if(curCh != null)
 		{
 			curCh.setPosition(mouseX,  mouseY);
-			if((curCh.getX()-700)*(curCh.getX()-700)+(curCh.getY()-300)*(curCh.getY()-300) < 40000)
+			if((curCh.getX()-600)*(curCh.getX()-600)+(curCh.getY()-400)*(curCh.getY()-400) < 40000)
 			{
 				this.setThick = 1;
 			}
