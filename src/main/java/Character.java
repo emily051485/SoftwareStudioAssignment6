@@ -36,7 +36,9 @@ public class Character
 	public void display()
 	{
 		this.parent.fill(r, g, b);
+		this.parent.strokeWeight(1);
 		this.parent.ellipse(x, y, radius, radius);
+		this.parent.strokeWeight(3);
 	}
 	
 	public void addTarget(Character target, int value)
@@ -79,9 +81,12 @@ public class Character
 	public void showName()
 	{
 		this.parent.fill(0, 200, 0);
+		this.parent.strokeWeight(1);
 		this.parent.rect(x+20, y-15, name.length()*10, 25);
 		this.parent.fill(255);
 		this.parent.text(name, x+25, y);
+		this.parent.strokeWeight(3);
+		
 	}
 	
 	public void setPosition(float x, float y)
