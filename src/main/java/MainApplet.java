@@ -210,7 +210,7 @@ public class MainApplet extends PApplet{
 	{
 		if(curCh != null)
 		{	
-			if( (curCh.getX()-700)*(curCh.getX()-700)+(curCh.getY()-300)*(curCh.getY()-300) < 40000)
+			if( (curCh.getX()-600)*(curCh.getX()-600)+(curCh.getY()-400)*(curCh.getY()-400) < 40000)
 			{
 				if(curCh.isInCircle() == 0)
 				{
