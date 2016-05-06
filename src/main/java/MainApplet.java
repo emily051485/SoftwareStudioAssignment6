@@ -91,7 +91,7 @@ public class MainApplet extends PApplet{
 		background(255);
 		
 		display();		// draw the big circles
-		drawline();		// fraw the edges between nodes
+		drawline();		// draw the edges between nodes
 		for(int i=0;i<characters.size();i++)
 		{
 			characters.get(i).display();		// draw all the character nodes
